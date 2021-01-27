@@ -75,13 +75,13 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js, jsx, ts, tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ],
-    "src/**/*.{css, jsx, tsx}": [
+    "src/**/*.{css,jsx,tsx}": [
       "stylelint --fix"
     ],
-    "functions/src/**/*.{js, ts}": [
+    "functions/src/**/*.{js,ts}": [
       "cd functions/ && eslint --fix"
     ]
   }
