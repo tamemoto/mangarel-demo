@@ -4,6 +4,7 @@ import puppeteer from 'puppeteer';
 
 import { collectionName } from './services/mangarel/constants';
 import { feedCalendar } from './crawlers/kodansha-calendar';
+import { saveFeedMemo } from './firestore-admin/feed-memo';
 
 admin.initializeApp();
 
@@ -20,12 +21,25 @@ const PUPPETEER_OPTIONS = {
   headless: true,
 };
 
-export const fetchCalendar = async () => {
-  const browser = await puppeteer.launch(PUPPETEER_OPTIONS);
-  const page = await browser.newPage();
-  const memos = await feedCalendar(page);
-  console.log(memos);
-};
+export const fetchCalendar = functions
+  .region('asia-northeast')
+  .runWith({
+    timeoutSeconds: 300,
+    memory: '2GB',
+  })
+  .pubsub.schedule('0 2 1,10,20 * *')
+  .timeZone('Asia/Tokyo')
+  .onRun(async () => {
+    const browser = await puppeteer.launch(PUPPETEER_OPTIONS);
+    const page = await browser.newPage();
+    const db = admin.firestore();
+
+    const memos = await feedCalendar(page);
+    const fetchCount = await saveFeedMemo(db, memos, 'kadokawa');
+
+    await browser.close();
+    console.log(`Fetched kodansha wrote ${fetchCount} memos`);
+  });
 
 export const publishers = functions
   .region('asia-northeast2')
@@ -37,5 +51,3 @@ export const publishers = functions
     const data = snap.docs.map((doc) => doc.data());
     res.send({ data });
   });
-
-fetchCalendar();
