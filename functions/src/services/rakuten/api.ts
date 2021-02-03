@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import _ from 'lodash';
-import {BookItem} from "./models/book-item"; //eslint-disable-line
+import { BookItem } from './models/book-item'; //eslint-disable-line
 
 const BASE_URL =
   'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
@@ -29,8 +29,13 @@ export const findBookItem = async (
 
   // オブジェクトのkeyとvalueを順に出力、queryにセット
   _.forEach(searchParams, (v, k) => {
-    const value = String(v || '').trim();
-    if (value) query.set(k, value);
+    let value = String(v || '').trim();
+    if (value) {
+      if (value === 'kodansha') {
+        value = '講談社';
+      }
+      query.set(k, value);
+    }
   });
   query.set('applicationId', applicationId);
 

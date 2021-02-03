@@ -19,8 +19,8 @@ export const saveFeedMemo = async (
     } else {
       await memosRef.doc().set({
         ...memo,
-        fetchAt: admin.firestore.Timestamp.fromDate(new Date(0)),
-        updateAt: admin.firestore.FieldValue.serverTimestamp(),
+        fetchedAt: admin.firestore.Timestamp.fromDate(new Date(0)),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
       count += 1;
     }

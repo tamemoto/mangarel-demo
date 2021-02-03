@@ -45,4 +45,6 @@ export const findOrCreateAuthors = async (
     }
     i += 1;
   }
+
+  return authors;
 };
