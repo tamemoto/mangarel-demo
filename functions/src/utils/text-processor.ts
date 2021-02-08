@@ -1,3 +1,7 @@
+import { uniq } from 'lodash';
+import { bigram } from './n-gram';
+
+// 数値やアルファベットの全角文字を半角にする
 export const halfWiden = (text: string) =>
   text
     .replace(/[！-～]/g, (match) =>
@@ -11,11 +15,13 @@ export const halfWiden = (text: string) =>
     .replace(/[〜～]/g, '~')
     .replace(/[―─－]/g, '-');
 
+// ひらがなをカタカナにする
 export const hira2kata = (text: string) =>
   text.replace(/[\u3041-\u3096]/g, (match) =>
     String.fromCharCode(match.charCodeAt(0) + 0x60),
   );
 
+// 半角かなを全角にする
 export const kanaFullWiden = (text: string) => {
   const kanaMap = {
     ｶﾞ: 'ガ',
@@ -116,6 +122,23 @@ export const kanaFullWiden = (text: string) => {
     .replace(/ﾟ/g, '゜');
 };
 
+export const chopChink = (text: string) => {
+  return text
+    .replace(/[-/&!?@_,.:;"'~]/g, ' ')
+    .replace(/[−‐―／＆！？＿，．：；“”‘’〜～]/g, ' ')
+    .replace(/[♪、。]/g, ' ')
+    .replace(/[・×☆★*＊]/g, '')
+    .replace(/\(([^)]*)\)/g, ' $1')
+    .replace(/（([^〕]*)）/g, ' $1')
+    .replace(/〔([^〕]*)〕/g, ' $1')
+    .replace(/「([^」]*)」/g, ' $1')
+    .replace(/『([^』]*)』/g, ' $1')
+    .replace(/【([^】]*)】/g, ' $1')
+    .replace(/\[([^\]]*)\]/g, ' $1')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+};
+
 export const normalize = (text: string | null) =>
   halfWiden(kanaFullWiden(text || ''))
     .replace(/[☆★♪×・、。]/g, '')
@@ -127,3 +150,29 @@ export const uniform = (text: string | null) =>
   halfWiden(kanaFullWiden(text || ''))
     .replace(/\s+/g, ' ')
     .trim();
+
+export const tokenize = (...words: string[]) => {
+  const resultArr: string[] = [];
+  let prevVal = '';
+
+  halfWiden(hira2kata(kanaFullWiden(chopChink(words.join(' ')))))
+    .toLowerCase()
+    .split(' ')
+    .forEach((val) => {
+      if (val.match(/^[0-9a-z+]+$/)) {
+        if (val.length > 3 && val.match(/[sS]$/)) {
+          resultArr.push(val.substring(0, val.length - 1));
+        } else {
+          resultArr.push(val);
+        }
+        prevVal = '';
+      } else if (val.length === 1 && /^[亜-黑]+$/u.test(val)) {
+        prevVal = val;
+      } else {
+        bigram(`${prevVal}${val}`).forEach((cut) => resultArr.push(cut));
+        prevVal = '';
+      }
+    });
+
+  return uniq(resultArr);
+};

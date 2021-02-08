@@ -13,6 +13,7 @@ export type Book = {
   isbn: string;
   rbCode: string;
   hasImage: boolean;
+  tokenMap: { [token: string]: boolean } | null;
   publishedOn: firebase.firestore.Timestamp | null;
   createdAt: firebase.firestore.Timestamp | null;
   updatedAt: firebase.firestore.Timestamp | null;
@@ -28,6 +29,7 @@ export const blankBook: Book = {
   isbn: '',
   rbCode: '',
   hasImage: false,
+  tokenMap: null,
   publishedOn: null,
   createdAt: null,
   updatedAt: null,
