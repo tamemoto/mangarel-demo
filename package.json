@@ -82,5 +82,21 @@
     "stylelint-order": "^4.1.0",
     "stylelint-processor-styled-components": "^1.10.0",
     "typesync": "^0.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "src/**/*.{css,jsx,tsx}": [
+      "stylelint --fix"
+    ],
+    "functions/src/**/*.{js,ts}": [
+      "cd functions/ && eslint --fix"
+    ]
   }
 }
