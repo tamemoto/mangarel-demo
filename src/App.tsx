@@ -1,23 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
+import paths from 'routes/routes';
+import { BookCard } from 'components/molecules/card/BookCard';
 import './App.css';
+import { Redirect, Route, Switch } from 'react-router';
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
+const App: FC = () => (
+  <div>
+    <Switch>
+      <Route path={paths.home} component={BookCard} />
+      <Route path={paths.book} />
+      <Redirect to={paths.home} />
+    </Switch>
   </div>
 );
 
