@@ -16,7 +16,7 @@ const DividingHeader: FC = ({ children }) => {
 
   return (
     <Heading as="h2" dividing>
-      <InsideIcon />
+      <InsideIcon name="calendar alternate outline" />
       {children}
     </Heading>
   );

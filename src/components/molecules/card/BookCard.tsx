@@ -1,33 +1,16 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-// import { Book } from 'services/mangarel/models/book';
-import CardDescription from '../../atoms/CardDescription';
-import CardContent from '../../atoms/CardContent';
-import CardTitle from '../../atoms/CardTitle';
-import CardInfo from '../../atoms/CardInfo';
-import SmallCoverImage from '../../atoms/SmallCoverImage';
+import { Book } from 'services/mangarel/models/book';
+import CardDescription from '../../atoms/card/CardDescription';
+import CardContent from '../../atoms/card/CardContent';
+import CardTitle from '../../atoms/card/CardTitle';
+import CardInfo from '../../atoms/card/CardInfo';
+import SmallCoverImage from '../../atoms/images/SmallCoverImage';
 import { getAuthorsText, getCoverImage, getHumanDate } from '../../item-tools';
-import ItemCard from '../../atoms/ItemCard';
+import ItemCard from '../../atoms/card/ItemCard';
 
-export const BookCard: FC = () => {
-  const book = {
-    id: 'aaa',
-    title: 'text',
-    titleReading: 'text',
-    publisherId: 'aaaaaa',
-    publisher: null,
-    authorIds: [],
-    authors: [],
-    isbn: 'aaa',
-    rbCode: 'aaa',
-    hasImage: false,
-    tokenMap: null,
-    publishedOn: null,
-    createdAt: null,
-    updatedAt: null,
-  };
-
+export const BookCard: FC<{ book: Book }> = ({ book }) => {
   const authorsText = getAuthorsText(book);
 
   return (

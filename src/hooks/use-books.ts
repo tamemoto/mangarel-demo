@@ -46,6 +46,8 @@ const useBooks = (options?: BooksOptions) => {
         setError(null);
       } catch (e) {
         setError(e);
+
+        return;
       }
       setLoading(false);
     };
