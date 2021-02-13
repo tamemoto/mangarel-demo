@@ -3,7 +3,7 @@ import admin from 'firebase-admin';
 import { collectionName } from './services/mangarel/constants';
 
 module.exports = functions
-  .region(functions.config().locate.region)
+  .region(functions.config().locale.region)
   .https.onRequest(async (req, res) => {
     const snap = await admin
       .firestore()
