@@ -29,7 +29,9 @@ export const BookCard: FC<{ book: Book }> = ({ book }) => {
               )}
               {getHumanDate(book.publishedOn)}
             </CardDescription>
-            <CardDescription>{book.publisher}</CardDescription>
+            <CardDescription>
+              {book.publisher && book.publisher.name}
+            </CardDescription>
           </CardInfo>
         </CardContent>
       </ItemCard>

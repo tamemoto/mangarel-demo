@@ -13,8 +13,8 @@ const App: FC = () => (
     <NavigationBar />
     <Spacer />
     <Switch>
-      <Route path={paths.home} component={Home} />
-      <Route path={paths.book} component={Book} exact />
+      <Route path={paths.book} component={Book} />
+      <Route path={paths.home} component={Home} exact />
       <Redirect to={paths.home} />
     </Switch>
   </div>

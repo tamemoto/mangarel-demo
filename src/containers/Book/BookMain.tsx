@@ -10,7 +10,8 @@ const BookMainContainer: FC = () => {
   const item: any = useParams();
   if (!item?.bookId) history.replace(paths.home);
 
-  const { book } = useBook(item.bookId);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { book } = useBook(item.bookId!);
 
   return book ? <BookMain book={book} /> : <div />;
 };
