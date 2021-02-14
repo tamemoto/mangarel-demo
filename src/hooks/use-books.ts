@@ -9,7 +9,7 @@ type BooksOptions = {
 };
 
 const defaultOptions: Required<BooksOptions> = {
-  limit: 30,
+  limit: 1,
 };
 
 const useBooks = (options?: BooksOptions) => {
@@ -54,6 +54,8 @@ const useBooks = (options?: BooksOptions) => {
 
     load();
   }, []);
+
+  console.log('use-books', books);
 
   return { books, loading, error };
 };

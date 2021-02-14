@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import styled from '@emotion/styled';
 import { isFuture } from 'date-fns';
 import { ThemeContext } from '../../../contexts';

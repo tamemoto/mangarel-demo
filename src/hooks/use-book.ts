@@ -32,6 +32,8 @@ const useBook = (id: string) => {
     load();
   }, [id]);
 
+  console.log('use-book', book);
+
   return { book, loading, error };
 };
 
