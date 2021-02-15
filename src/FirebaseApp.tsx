@@ -17,8 +17,6 @@ const FirebaseApp: FC = ({ children }) => {
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-  console.log('firebase', user);
-
   const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
     if (firebaseUser) {
       if (counterRef.current === 1 && credential) {
