@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@storybook/react": "^6.1.18",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
@@ -13,10 +15,12 @@
     "@types/node": "^12.19.15",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
+    "babel-loader": "^8.2.2",
     "date-fns": "^2.17.0",
     "firebase": "^8.2.6",
     "lodash": "^4.17.20",
     "react": "^17.0.1",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-dom": "^17.0.1",
     "react-firebaseui": "^4.1.0",
     "react-router": "^5.2.0",
@@ -33,7 +37,9 @@
     "build": "react-scripts build",
     "deploy:hosting": "npm run build && firebase deploy --only hosting",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006",
+    "build:storybook": "book-storybook -o build/storybook"
   },
   "eslintConfig": {
     "extends": [
@@ -54,12 +60,18 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^6.1.18",
+    "@storybook/addon-actions": "^6.1.18",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-knobs": "^6.1.18",
+    "@storybook/addon-links": "^6.1.18",
     "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/lodash": "^4.14.168",
     "@types/prettier": "^2.1.6",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
     "@types/sprintf-js": "^1.1.2",
+    "@types/storybook__addon-info": "^5.2.3",
     "@types/stylelint": "^9.10.1",
     "@types/testing-library__jest-dom": "^5.9.5",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
