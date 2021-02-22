@@ -129,6 +129,7 @@ module.exports = {
                 tsx: 'never'
             }
         ],
+        //ここで例外を定義
         'import/no-extraneous-dependencies': [
             'error',
             {
