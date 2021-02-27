@@ -8,7 +8,7 @@ const WideButton: FC<{ color: string }> = ({ color, children }) => {
       border-width: 1px !important;
       box-shadow: 0 0 0 1px ${color} inset !important;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 500;
       margin: 0.25rem 0 0.25rem;
       padding: 0.66rem 0 0.55rem;
       width: 100%;
